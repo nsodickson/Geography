@@ -1,0 +1,1 @@
+Playing around with Geography Datasets in Python. Download the required dataset with this link: https://github.com/wmgeolab/geoBoundaries/raw/main/releaseData/CGAZ/geoBoundariesCGAZ_ADM0.geojson. The data is sourced from the geoBoundries database: https://www.geoboundaries.org/index.html. 
