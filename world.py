@@ -2,7 +2,7 @@ import tkinter as tk
 import numpy as np
 import json
 
-with open("geoBoundariesCGAZ_ADM0.geojson", "r") as f:
+with open("Data/geoBoundariesCGAZ_ADM0.geojson", "r") as f:
     geo_dict = json.load(f)
 
 features = geo_dict["features"]

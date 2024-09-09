@@ -5,7 +5,7 @@ import numpy as np
 import random
 from PIL import Image, ImageTk
 
-with open("geoBoundariesCGAZ_ADM0.geojson", "r") as f:
+with open("Data/geoBoundariesCGAZ_ADM0.geojson", "r") as f:
     geo_dict = json.load(f)
 
 features = geo_dict["features"]
@@ -55,9 +55,9 @@ def drawCountry():
         mainland_points = np.empty(0)
         for poly in geometry["coordinates"]:
             points = np.array(poly[0]).flatten()
-            if len(points) > 10000:
+            if len(points) > 100000:
                 mainland_points = np.append(mainland_points, np.array(poly[0]).flatten())
-        if len(mainland_points) == 0:
+        if len(mainland_points) == 0:  # Edge case for small island countries with few points
             for poly in geometry["coordinates"]:
                 mainland_points = np.append(mainland_points, np.array(poly[0]).flatten())
         mainland_points[1::2] *= -1  # Reversing y points for coordinate change
@@ -106,9 +106,10 @@ slider = tk.Scale(root, from_=50, to_=500, length=200, command=onSlide, orient=t
 slider.set(200)
 slider.grid(row=1, column=2, pady=5)
 
-with Image.open("left.png") as left_img:
+"""
+with Image.open("Assets/left.png") as left_img:
     left_img = left_img.resize((40, 40))
-with Image.open("right.png") as right_img:
+with Image.open("Assets/right.png") as right_img:
     right_img = right_img.resize((40, 40))
 left_img = ImageTk.PhotoImage(left_img)
 right_img = ImageTk.PhotoImage(right_img)
@@ -123,8 +124,9 @@ buttons.tag_bind(right, "<Button-1>", onClickRight)
 
 reveal = tk.Button(root, text="Reveal", command=revealCountry)
 reveal.grid(row=2, column=1, columnspan=2, pady=5)
+"""
 
-# dropdown = tk.OptionMenu(root, country_var, *countries, command=onSelect)
-# dropdown.grid(row=1, column=1, pady=5)
+dropdown = tk.OptionMenu(root, country_var, *countries, command=onSelect)
+dropdown.grid(row=1, column=1, pady=5)
 
 root.mainloop()
